@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact — Eco-Stream Logistics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">Eco-Stream Logistics</a>
+      <nav aria-label="Primary">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Request a Quote</h1>
+    <p class="muted">Fill in the form and we'll get back to you within one business day.</p>
+
+    <form id="contactForm" novalidate>
+      <div class="form-row">
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" required aria-required="true">
+        <div class="error" id="error-name" aria-live="polite"></div>
+      </div>
+
+      <div class="form-row">
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" required aria-required="true">
+        <div class="error" id="error-email" aria-live="polite"></div>
+      </div>
+
+      <div class="form-row">
+        <label for="phone">Phone (optional)</label>
+        <input id="phone" name="phone" type="tel">
+      </div>
+
+      <div class="form-row">
+        <label for="details">Delivery details</label>
+        <textarea id="details" name="details" rows="5" required aria-required="true"></textarea>
+        <div class="error" id="error-details" aria-live="polite"></div>
+      </div>
+
+      <button type="submit" class="btn">Send request</button>
+      <div id="formMessage" aria-live="polite"></div>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Eco-Stream Logistics.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
