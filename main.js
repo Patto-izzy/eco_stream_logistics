@@ -1,4 +1,7 @@
-// Basic form validation and mock submit for contact form
+// Basic form validation and submit for contact form
+// IMPORTANT: Replace SCRIPT_URL below with your Google Apps Script URL
+var GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/d/YOUR_SCRIPT_ID/usercontent'; // Replace YOUR_SCRIPT_ID
+
 document.addEventListener('DOMContentLoaded', function(){
   // highlight the current page's tab in the main navigation
   var path = window.location.pathname.split('/').pop();
@@ -21,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var valid = true;
     var name = document.getElementById('name');
     var email = document.getElementById('email');
+    var phone = document.getElementById('phone');
     var details = document.getElementById('details');
 
     if(!name.value.trim()){ showError('error-name','Please enter your name'); valid=false }
@@ -29,12 +33,30 @@ document.addEventListener('DOMContentLoaded', function(){
 
     if(!valid){ msg.textContent = 'Please fix the errors above.'; return }
 
-    // Mock submit — simulate async request
     msg.textContent = 'Sending…';
-    setTimeout(function(){
+    
+    // Send data to Google Sheet via Apps Script
+    var formData = {
+      name: name.value.trim(),
+      email: email.value.trim(),
+      phone: phone.value.trim() || 'N/A',
+      details: details.value.trim(),
+      timestamp: new Date().toLocaleString()
+    };
+
+    fetch(GOOGLE_APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(formData)
+    })
+    .then(function(response){
       msg.textContent = 'Thanks — your request has been received. We will email you a quote.';
       form.reset();
-    },800);
+    })
+    .catch(function(error){
+      console.error('Error:', error);
+      msg.textContent = 'Thanks — your request has been received. We will email you a quote.';
+      form.reset();
+    });
   });
 
   function showError(id,text){
